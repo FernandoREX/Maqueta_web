@@ -1,61 +1,88 @@
-// Función para cargar y mostrar los tweets
-async function cargarTweets() {
-  // Mostrar un indicador de carga
-  const contenedorTweets = document.getElementById("x-timeline-container");
-  if (!contenedorTweets) return;
-  contenedorTweets.innerHTML =
-    '<div class="cargando">Cargando noticias...</div>';
+// Lista de IDs de tweets (puedes obtenerlos de la URL del tweet)
+// Ejemplo: https://twitter.com/ConsAbogaciaMEX/status/1835521852539621576 -> ID = 1835521852539621576
+const tweetsIds = [
+  "1725238602941059377", // Tweet 1
+  "1669757800845651982", // Tweet 2
+  "1697721419570823314", // Tweet 3
+  "1750661347665207651", // Tweet 4
+  "1689034507242856448", // Tweet 5
+  // Agrega más IDs aquí, en el orden que quieras que aparezcan
+];
 
-  try {
-    // Hacer la petición a nuestro propio backend PHP
-    const respuesta = await fetch("/api/tweets.php");
+// Función para cargar todos los tweets dinámicamente
+async function cargarTweetsDinamicos() {
+  const container = document.getElementById("tweets-container");
+  if (!container) return;
 
-    if (!respuesta.ok) {
-      throw new Error(`HTTP error! status: ${respuesta.status}`);
-    }
+  // Limpiar contenedor (por si acaso)
+  container.innerHTML = "";
 
-    const data = await respuesta.json();
-
-    // Limpiar el contenedor y verificar si hay datos
-    contenedorTweets.innerHTML = "";
-    if (!data.data || data.data.length === 0) {
-      contenedorTweets.innerHTML = "<p>No se encontraron tweets recientes.</p>";
-      return;
-    }
-
-    // Iterar sobre los tweets y crear elementos HTML para mostrarlos
-    data.data.forEach((tweet) => {
-      const fecha = new Date(tweet.created_at);
-      const fechaFormateada = fecha.toLocaleDateString("es-MX");
-
-      const tweetElement = document.createElement("div");
-      tweetElement.classList.add("tweet-item");
-      tweetElement.innerHTML = `
-                <div class="tweet-fecha">${fechaFormateada}</div>
-                <div class="tweet-texto">${escapeHTML(tweet.text)}</div>
-                <div class="tweet-metricas">
-                    👍 ${tweet.public_metrics.like_count || 0} 
-                    🔁 ${tweet.public_metrics.retweet_count || 0}
-                </div>
-            `;
-      contenedorTweets.appendChild(tweetElement);
-    });
-  } catch (error) {
-    console.error("Error al cargar los tweets:", error);
-    contenedorTweets.innerHTML =
-      '<p class="error">Hubo un problema al cargar las noticias. Por favor, intenta de nuevo más tarde.</p>';
+  // Esperar a que el widget de X esté listo
+  if (typeof twttr === "undefined") {
+    console.error(
+      "El widget de X no se ha cargado. Asegúrate de incluir el script widgets.js",
+    );
+    container.innerHTML =
+      '<p class="error">Error al cargar los tweets. Intenta de nuevo más tarde.</p>';
+    return;
   }
-}
 
-// Función de seguridad para evitar inyección de código (XSS)
-function escapeHTML(str) {
-  return str.replace(/[&<>]/g, function (m) {
-    if (m === "&") return "&amp;";
-    if (m === "<") return "&lt;";
-    if (m === ">") return "&gt;";
-    return m;
+  // Usamos Promise.all para esperar que todos los tweets se inserten
+  const promesas = tweetsIds.map((tweetId) => {
+    return new Promise((resolve, reject) => {
+      // Crear un contenedor individual para cada tweet
+      const tweetDiv = document.createElement("div");
+      tweetDiv.className = "tweet-wrapper";
+      container.appendChild(tweetDiv);
+
+      // Usar la API oficial de X para crear el tweet
+      twttr.widgets
+        .createTweet(tweetId, tweetDiv, {
+          align: "center", // Opcional: center, left, right
+          lang: "es", // Idioma
+          dnt: true, // No rastrear (Do Not Track)
+          conversation: "none", // Oculta la conversación (opcional)
+        })
+        .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          console.error(`Error al cargar tweet ${tweetId}:`, error);
+          tweetDiv.innerHTML = `<p class="error">No se pudo cargar este tweet. <a href="https://x.com/ConsAbogaciaMEX/status/${tweetId}" target="_blank">Ver en X</a></p>`;
+          resolve(); // Resolvemos igual para que no se detenga la carga de los demás
+        });
+    });
   });
+
+  await Promise.all(promesas);
+  console.log("Todos los tweets cargados");
 }
 
-// Cargar los tweets cuando la página esté lista
-document.addEventListener("DOMContentLoaded", cargarTweets);
+// Ejecutar cuando el DOM esté listo Y el widget de X esté disponible
+document.addEventListener("DOMContentLoaded", () => {
+  // Si el widget ya está cargado, ejecutamos directamente
+  if (typeof twttr !== "undefined" && twttr.widgets) {
+    cargarTweetsDinamicos();
+  } else {
+    // Esperar a que el script widgets.js cargue y ejecute su callback
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      t._e = [];
+      t.ready = function (f) {
+        t._e.push(f);
+      };
+      return t;
+    })(document, "script", "twitter-wjs");
+
+    twttr.ready(() => {
+      cargarTweetsDinamicos();
+    });
+  }
+});

@@ -196,7 +196,7 @@
         </div>
       </section>
 
-      <!-- ==================== NOTICIAS (Tweets incrustados) ==================== -->
+      <!-- ==================== NOTICIAS (Tweets dinámicos) ==================== -->
       <section id="noticias" class="news">
         <div class="container">
           <h2>Noticias jurídicas y actualidad legal en México</h2>
@@ -204,58 +204,8 @@
             Mantente informado sobre cambios, reformas y temas relevantes en el
             ámbito jurídico.
           </p>
-          <div class="tweets-grid scrollable">
-            <!-- Tweet 1 -->
-            <blockquote class="twitter-tweet">
-              <p lang="es" dir="ltr">
-                Y la suspensión definitiva? En sus prisas, todo se ha manchado
-                de ilegitimidad.
-                <a href="https://t.co/jxIXkgl5HD">pic.twitter.com/jxIXkgl5HD</a>
-              </p>
-              &mdash; Consejo General de la Abogacía Mexicana (@ConsAbogaciaMEX)
-              <a
-                href="https://twitter.com/ConsAbogaciaMEX/status/1835521852539621576?ref_src=twsrc%5Etfw"
-                >September 16, 2024</a
-              >
-            </blockquote>
-
-            <!-- Tweet 2 -->
-            <blockquote class="twitter-tweet">
-              <p lang="es" dir="ltr">
-                La reforma planteada a la Constitución en materia de pensiones,
-                aprobada en el Senado, prevé en su artículo 2o transitorio,
-                normas violatorias al Artículo 14 constitucional y a los
-                Derechos Humanos al ser retroactivas.<a
-                  href="https://twitter.com/hashtag/NoRetroactividad?src=hash&amp;ref_src=twsrc%5Etfw"
-                  >#NoRetroactividad</a
-                >
-                <a
-                  href="https://twitter.com/hashtag/DerechosHumanos?src=hash&amp;ref_src=twsrc%5Etfw"
-                  >#DerechosHumanos</a
-                >
-                <a href="https://t.co/NzlomxKOMw">pic.twitter.com/NzlomxKOMw</a>
-              </p>
-              &mdash; Consejo General de la Abogacía Mexicana (@ConsAbogaciaMEX)
-              <a
-                href="https://twitter.com/ConsAbogaciaMEX/status/2032468854828417032?ref_src=twsrc%5Etfw"
-                >March 13, 2026</a
-              >
-            </blockquote>
-
-            <!-- Tweet 3 -->
-            <blockquote class="twitter-tweet">
-              <p lang="es" dir="ltr">
-                Se comparte pronunciamiento del Consejo General de la Abogacía
-                Mexicana sobre la información referente a la situación académica
-                de la Ministra Yasmín Esquivel.
-                <a href="https://t.co/RvXucrKeXS">pic.twitter.com/RvXucrKeXS</a>
-              </p>
-              &mdash; Consejo General de la Abogacía Mexicana (@ConsAbogaciaMEX)
-              <a
-                href="https://twitter.com/ConsAbogaciaMEX/status/1606080528829976578?ref_src=twsrc%5Etfw"
-                >December 23, 2022</a
-              >
-            </blockquote>
+          <div id="tweets-container" class="tweets-grid scrollable">
+            <!-- Aquí se cargarán los tweets automáticamente -->
           </div>
         </div>
       </section>
@@ -272,7 +222,7 @@
         </div>
       </section>
 
-      <!-- ==================== CONTACTO ==================== -->
+      <!-- ==================== SECCIÓN CONTACTO ==================== -->
       <section id="contacto" class="contact">
         <div class="container">
           <h2>Contacto OMCA</h2>
@@ -280,29 +230,44 @@
             ¿Interesado en formar parte del Colegio o conocer más sobre nuestras
             actividades? Contáctanos.
           </p>
-          <form action="#" method="post" class="contact-form">
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Nombre completo"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Correo electrónico"
-              required
-            />
-            <input type="tel" name="telefono" placeholder="Teléfono" />
-            <textarea
-              name="mensaje"
-              placeholder="¿Cómo podemos ayudarte?"
-              rows="5"
-            ></textarea>
-            <button type="submit" class="btn btn--primary">
-              Enviar mensaje
-            </button>
-          </form>
+
+          <!-- Formulario -->
+          <div id="contact-form-container" class="contact-form-container">
+            <form id="contact-form" class="contact-form" method="post">
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre completo"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Correo electrónico"
+                required
+              />
+              <input type="tel" name="telefono" placeholder="Teléfono" />
+              <textarea
+                name="mensaje"
+                placeholder="¿Cómo podemos ayudarte?"
+                rows="5"
+              ></textarea>
+              <button type="submit" class="btn btn--primary">
+                Enviar mensaje
+              </button>
+            </form>
+          </div>
+
+          <!-- Mensaje de éxito (oculto inicialmente) -->
+          <div
+            id="success-message"
+            class="success-message"
+            style="display: none"
+          >
+            <div class="success-icon">✓</div>
+            <h3>¡Mensaje enviado!</h3>
+            <p>Gracias por contactarnos. En breve recibirás respuesta.</p>
+          </div>
         </div>
       </section>
     </main>
@@ -321,11 +286,7 @@
       </div>
     </footer>
 
-    <!-- Script oficial de X (Twitter) para cargar los widgets (una sola vez) -->
-    <script
-      async
-      src="https://platform.twitter.com/widgets.js"
-      charset="utf-8"
-    ></script>
+    <script src="js/noticias.js"></script>
+    <script src="js/contacto.js"></script>
   </body>
 </html>
