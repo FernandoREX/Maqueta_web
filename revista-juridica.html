@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revista Jurídica | OMCA</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="logo">OMCA</a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#inicio">Inicio</a></li>
+            <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
+            <li>
+              <a href="index.html#consejo-directivo">Consejo Directivo</a>
+            </li>
+            <li><a href="index.html#membresia">Membresía</a></li>
+            <li><a href="eventos-juridicos.html">Eventos Jurídicos</a></li>
+            <li><a href="publicaciones.html">Publicaciones</a></li>
+            <li><a href="revista-juridica.html">Revista Jurídica</a></li>
+            <li><a href="index.html#noticias">Noticias</a></li>
+            <li><a href="index.html#comunidad">Comunidad</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h1>Revista Jurídica</h1>
+          <p>Accede a artículos, análisis y publicaciones especializadas.</p>
+        </div>
+      </section>
+
+      <section class="journal-list">
+        <div class="container">
+          <div id="pdf-list-container" class="pdf-list"></div>
+          <div id="pdf-viewer" class="pdf-viewer">
+            <h3>Leyendo: <span id="pdf-title-view"></span></h3>
+            <iframe id="pdf-frame" src="" frameborder="0"></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <h3>Acceso al artículo</h3>
+        <p>Ingresa tus datos para continuar</p>
+        <form id="access-form">
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre completo"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Correo electrónico"
+            required
+          />
+          <button type="submit" class="btn btn--primary">
+            Enviar para leer
+          </button>
+        </form>
+        <button id="close-modal" style="margin-top: 1rem; background: #ccc">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <footer class="site-footer">...</footer>
+    <script src="js/revista.js"></script>
+  </body>
+</html>
