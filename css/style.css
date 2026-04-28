@@ -220,30 +220,122 @@ p {
   border-left: 4px solid #adb5bd;
 }
 
+/* ==================== HERO CON VIDEO FULL SCREEN ==================== */
 .hero {
-  background: #f8f9fa;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  color: #ffffff;
+  background-color: #343a40;
+}
+.hero .hero-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero .hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+.hero .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 .hero__title {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+}
+@media (min-width: 768px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 576px) {
+  .hero__title {
+    font-size: 1.8rem;
+  }
 }
 .hero__subtitle {
   font-size: 1.25rem;
-  color: #6c757d;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.5rem auto;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+@media (min-width: 576px) {
+  .hero__subtitle {
+    font-size: 1rem;
+  }
 }
 .hero__cta-group {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+}
+@media (min-width: 576px) {
+  .hero__cta-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
-.about .container,
+/* ==================== QUIÉNES SOMOS (fondo color sólido) ==================== */
+.about {
+  background-color: #810f0f;
+  color: #ffffff;
+  position: relative;
+}
+.about .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about h2,
+.about p {
+  color: #ffffff;
+}
+.about p {
+  opacity: 0.9;
+}
+.about .about-bottom-image {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+.about .about-bottom-image img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* ==================== SECCIONES GENERALES (ancho máximo) ==================== */
 .value-proposition .container,
 .events .container,
 .publications .container,
@@ -252,12 +344,12 @@ p {
 .cta-final .container,
 .board .container,
 .membership .container,
-.news .container,
-.contact .container {
+.news .container {
   max-width: 800px;
   margin: 0 auto;
 }
 
+/* ==================== PÁGINAS INTERNAS ==================== */
 .page-header {
   background: #f8f9fa;
   text-align: center;
@@ -265,6 +357,7 @@ p {
   border-bottom: 1px solid #dee2e6;
 }
 
+/* ==================== CONSEJO DIRECTIVO (GRID RESPONSIVE) ==================== */
 .board-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -331,20 +424,21 @@ p {
   text-decoration: underline;
 }
 
-.twitter-embed {
-  margin-top: 1.5rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background: #ffffff;
+/* ==================== MEMBRESÍA ==================== */
+.membership .benefits {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
 }
-.twitter-embed iframe {
-  width: 100%;
-  min-height: 500px;
+.membership .benefits li {
+  margin-bottom: 0.5rem;
 }
 
-section[id] {
-  scroll-margin-top: 80px; /* Ajusta este valor según la altura de tu header */
+/* ==================== EVENTOS, PUBLICACIONES, REVISTA ==================== */
+.events .btn,
+.publications .btn,
+.journal .btn {
+  margin-top: 1rem;
 }
 
 /* ==================== NOTICIAS (Tweets incrustados) ==================== */
@@ -391,7 +485,104 @@ section[id] {
     max-height: 400px;
   }
 }
-/* ==================== MENSAJE DE ÉXITO ==================== */
+/* ==================== COMUNIDAD ==================== */
+.community {
+  text-align: center;
+}
+
+/* ==================== CONTACTO CON IMAGEN DE FONDO CENTRADO ==================== */
+.contact {
+  position: relative;
+  background-color: #343a40;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo el bloque horizontalmente */
+  text-align: center;
+}
+.contact .contact-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/img/CONTACTO.webp"); /* Ruta corregida */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.contact .contact-bg-wrapper .contact-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+}
+.contact .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto; /* Centrado horizontal */
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+}
+.contact h2,
+.contact p {
+  color: #ffffff;
+  text-align: center;
+}
+.contact .contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 1.5rem auto 0;
+  width: 100%;
+}
+.contact .contact-form input,
+.contact .contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 0.25rem;
+  color: #343a40;
+  box-sizing: border-box;
+}
+.contact .contact-form input::placeholder,
+.contact .contact-form textarea::placeholder {
+  color: #6c757d;
+}
+.contact .contact-form textarea {
+  resize: vertical;
+}
+.contact .btn--primary {
+  background-color: #ffffff;
+  color: #343a40;
+  align-self: center;
+}
+.contact .btn--primary:hover {
+  background-color: #e9ecef;
+}
+
+@media (min-width: 576px) {
+  .contact .container {
+    padding: 1.5rem;
+    margin: 0 1rem;
+    width: auto;
+  }
+  .contact .contact-form {
+    max-width: 100%;
+  }
+}
+/* ==================== MENSAJE DE ÉXITO (FORMULARIO) ==================== */
 .success-message {
   text-align: center;
   padding: 2rem;
@@ -424,6 +615,97 @@ section[id] {
   margin-bottom: 0;
 }
 
+/* ==================== AJUSTE DE SCROLL PARA SECCIONES CON HEADER FIJO ==================== */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ==================== SECCIONES CON VIDEO DE FONDO ==================== */
+.membership,
+.community {
+  position: relative;
+  color: #ffffff;
+  background-color: #343a40;
+}
+.membership .section-video-wrapper,
+.community .section-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+.membership .section-video,
+.community .section-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.membership .section-overlay,
+.community .section-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+.membership .container,
+.community .container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+.membership h2,
+.membership p,
+.membership li,
+.membership a,
+.membership .benefits,
+.community h2,
+.community p,
+.community li,
+.community a,
+.community .benefits {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.membership .btn--primary,
+.community .btn--primary {
+  background-color: #ffffff;
+  color: #343a40;
+}
+.membership .btn--primary:hover,
+.community .btn--primary:hover {
+  background-color: #e9ecef;
+}
+.membership .btn--secondary,
+.community .btn--secondary {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.membership .btn--secondary:hover,
+.community .btn--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.membership .benefits,
+.community .benefits {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .membership .container,
+  .community .container {
+    padding: 3rem 1rem;
+  }
+}
 @media (min-width: 768px) {
   .main-nav ul {
     gap: 1rem;
