@@ -220,7 +220,7 @@ p {
   border-left: 4px solid #adb5bd;
 }
 
-/* ==================== HERO CON VIDEO FULL SCREEN ==================== */
+/* ==================== HERO CON IMAGEN FULL SCREEN ==================== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -241,6 +241,7 @@ p {
   overflow: hidden;
 }
 .hero .hero-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -490,6 +491,15 @@ p {
   text-align: center;
 }
 
+.colorRojo {
+  background-color: #810f0f;
+  color: #ffffff;
+  align-self: center;
+}
+.colorRojo:hover {
+  background-color: #a11b1b;
+}
+
 /* ==================== CONTACTO CON IMAGEN DE FONDO CENTRADO ==================== */
 .contact {
   position: relative;
@@ -590,7 +600,9 @@ p {
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 .success-message .success-icon {
   font-size: 3rem;
@@ -620,7 +632,7 @@ section[id] {
   scroll-margin-top: 80px;
 }
 
-/* ==================== SECCIONES CON VIDEO DE FONDO ==================== */
+/* ==================== SECCIONES CON IMAGEN DE FONDO ==================== */
 .membership,
 .community {
   position: relative;
@@ -639,6 +651,7 @@ section[id] {
 }
 .membership .section-video,
 .community .section-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -755,7 +768,9 @@ section[id] {
   border-radius: 0.5rem;
   padding: 1rem;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .pdf-item:hover {
   transform: translateY(-4px);
